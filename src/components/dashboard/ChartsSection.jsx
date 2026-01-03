@@ -48,8 +48,8 @@ function ChartsSection({ products, orders }) {
     <div className="space-y-6">
       
       {/* SALES TREND - LINE CHART */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Sales & Revenue Trend</h3>
+      <div className="bg-white border border-gray-200 rounded-lg p-4 lg:p-6">
+        <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-4">Sales & Revenue Trend</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={salesData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -94,8 +94,8 @@ function ChartsSection({ products, orders }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* CATEGORY DISTRIBUTION - PIE CHART */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Products by Category</h3>
+        <div className="bg-white border border-gray-200 rounded-lg p-4 lg:p-6">
+          <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-4">Products by Category</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -136,8 +136,8 @@ function ChartsSection({ products, orders }) {
         </div>
 
         {/* TOP PRODUCTS - BAR CHART */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Top Products by Value</h3>
+        <div className="bg-white border border-gray-200 rounded-lg p-4 lg:p-6">
+          <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-4">Top Products by Value</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={topProducts}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

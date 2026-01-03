@@ -112,14 +112,14 @@ function ProductsView() {
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900">Products</h2>
-          <p className="text-sm text-gray-600 mt-1">Manage your product catalog</p>
+          <h2 className="text-xl lg:text-2xl font-semibold text-gray-900">Products</h2>
+          <p className="text-xs lg:text-sm text-gray-600 mt-1">Manage your product catalog</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 w-full sm:w-auto"
         >
           <Plus size={18} />
           Add Product

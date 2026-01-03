@@ -29,8 +29,8 @@ function OrdersView() {
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">Orders</h2>
-        <p className="text-sm text-gray-600 mt-1">Manage customer orders</p>
+        <h2 className="text-xl lg:text-2xl font-semibold text-gray-900">Orders</h2>
+        <p className="text-xs lg:text-sm text-gray-600 mt-1">Manage customer orders</p>
       </div>
       
       {/* Orders Table */}

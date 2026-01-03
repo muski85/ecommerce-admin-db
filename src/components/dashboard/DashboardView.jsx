@@ -21,8 +21,8 @@ function DashboardView() {
       
       {/* 1. HEADER */}
       <div>
-        <h1 className="text-3xl font-black text-slate-900">Dashboard</h1>
-        <p className="text-slate-500 font-medium mt-1">Overview of your store performance</p>
+        <h1 className="text-2xl lg:text-3xl font-black text-slate-900">Dashboard</h1>
+        <p className="text-sm lg:text-base text-slate-500 font-medium mt-1">Overview of your store performance</p>
       </div>
       
       {/* 2. STATS SECTION */}
@@ -68,9 +68,11 @@ function DashboardView() {
       {/* 4. RECENT ORDERS SECTION - Also 32px gap from stats */}
       <section>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-slate-900">Recent Orders</h2>
-          <button className="flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
-            See all activity <ArrowRight size={16} />
+          <h2 className="text-lg lg:text-xl font-bold text-slate-900">Recent Orders</h2>
+          <button className="flex items-center gap-2 text-xs lg:text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
+            <span className="hidden sm:inline">See all activity</span>
+            <span className="sm:hidden">All</span>
+            <ArrowRight size={16} />
           </button>
         </div>
         

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Loader2, Menu, X } from 'lucide-react';
 import Sidebar from './components/layout/Sidebar';
 import DashboardView from './components/dashboard/DashboardView';
 import ProductsView from './components/products/ProductsView';
@@ -10,6 +10,7 @@ import Container from './components/layout/Container';
 
 function App() {
   const [activeView, setActiveView] = useState('dashboard');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isLoading, error } = useGetProductsQuery();
 
   if (isLoading) {
@@ -35,13 +36,39 @@ function App() {
   return (
     <div className="flex min-h-screen bg-slate-50">
 
-      {/* SIDEBAR */}
-      <Sidebar activeView={activeView} onViewChange={setActiveView} />
+      {/* Mobile Menu Button - Only visible on small screens */}
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
+      >
+        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
-      {/* MAIN CONTENT AREA */}
+      {/* Sidebar - Hidden on mobile by default, shown when menu opens */}
+      <div className={`
+        fixed lg:static inset-y-0 left-0 z-40 transform transition-transform duration-300
+        ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        <Sidebar
+          activeView={activeView}
+          onViewChange={(view) => {
+            setActiveView(view);
+            setMobileMenuOpen(false); // Close menu after selection on mobile
+          }}
+        />
+      </div>
+
+      {/* Overlay - Darkens background when mobile menu is open */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-
-        <Container className="pt-6 pb-12 px-4 sm:px-6 lg:px-8">
+        <Container className="pt-16 lg:pt-6 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="animate-in fade-in duration-500">
               {activeView === 'dashboard' && <DashboardView />}

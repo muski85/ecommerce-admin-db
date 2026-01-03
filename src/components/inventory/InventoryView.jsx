@@ -17,8 +17,8 @@ function InventoryView() {
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">Inventory</h2>
-        <p className="text-sm text-gray-600 mt-1">Monitor stock levels and categories</p>
+        <h2 className="text-xl lg:text-2xl font-semibold text-gray-900">Inventory</h2>
+        <p className="text-xs lg:text-sm text-gray-600 mt-1">Monitor stock levels and categories</p>
       </div>
       
       {/* Two-column grid */}
