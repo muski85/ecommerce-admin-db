@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { AlertCircle, Loader2, Menu, X } from 'lucide-react';
 import Sidebar from './components/layout/Sidebar';
-import DashboardView from './components/dashboard/DashboardView';
-import ProductsView from './components/products/ProductsView';
-import OrdersView from './components/orders/OrdersView';
-import InventoryView from './components/inventory/InventoryView';
 import { useGetProductsQuery } from './features/api/apiSlice';
 import Container from './components/layout/Container';
+
+const DashboardView = lazy(() => import('./components/dashboard/DashboardView'));
+const ProductsView = lazy(() => import('./components/products/ProductsView'));
+const OrdersView = lazy(() => import('./components/orders/OrdersView'));
+const InventoryView = lazy(() => import('./components/inventory/InventoryView'));
 
 function App() {
   const [activeView, setActiveView] = useState('dashboard');
@@ -36,13 +37,15 @@ function App() {
   return (
     <div className="flex min-h-screen bg-slate-50">
 
-      {/* Mobile Menu Button - Only visible on small screens */}
-      <button
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
-      >
-        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+      {/* Mobile Menu Button - Only visible on small screens when menu is closed */}
+      {!mobileMenuOpen && (
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
+        >
+          <Menu size={24} />
+        </button>
+      )}
 
       {/* Sidebar - Hidden on mobile by default, shown when menu opens */}
       <div className={`
@@ -53,8 +56,9 @@ function App() {
           activeView={activeView}
           onViewChange={(view) => {
             setActiveView(view);
-            setMobileMenuOpen(false); // Close menu after selection on mobile
+            setMobileMenuOpen(false);
           }}
+          onClose={() => setMobileMenuOpen(false)}
         />
       </div>
 
@@ -70,12 +74,18 @@ function App() {
       <main className="flex-1 overflow-y-auto">
         <Container className="pt-16 lg:pt-6 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="animate-in fade-in duration-500">
-              {activeView === 'dashboard' && <DashboardView />}
-              {activeView === 'products' && <ProductsView />}
-              {activeView === 'orders' && <OrdersView />}
-              {activeView === 'inventory' && <InventoryView />}
-            </div>
+            <Suspense fallback={
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
+              </div>
+            }>
+              <div className="animate-in fade-in duration-500">
+                {activeView === 'dashboard' && <DashboardView />}
+                {activeView === 'products' && <ProductsView />}
+                {activeView === 'orders' && <OrdersView />}
+                {activeView === 'inventory' && <InventoryView />}
+              </div>
+            </Suspense>
           </div>
         </Container>
       </main>

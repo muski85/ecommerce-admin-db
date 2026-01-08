@@ -1,7 +1,7 @@
 import React from "react";
-import { Package, ShoppingCart, TrendingUp,LayoutDashboard } from "lucide-react";
+import { Package, ShoppingCart, TrendingUp, LayoutDashboard, X } from "lucide-react";
 
-function Sidebar({ activeView, onViewChange }) {
+function Sidebar({ activeView, onViewChange, onClose }) {
   const navItems = [
     { id: "dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { id: "products", icon: Package, label: "Products" },
@@ -10,16 +10,26 @@ function Sidebar({ activeView, onViewChange }) {
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <aside className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col relative">
+
+      {/* Close button - Only visible on mobile */}
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="lg:hidden absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-lg transition-colors z-10"
+        >
+          <X size={20} className="text-gray-600" />
+        </button>
+      )}
 
       {/* LOGO SECTION */}
-      <div className="pt-6 pb-6 px-6 border-b border-gray-200">
+      <div className="pt-6 pb-6 px-4 lg:px-6 pr-12 lg:pr-6 border-b border-gray-200">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <ShoppingCart size={18} className="text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900">Admin Panel</h1>
+            <h1 className="text-base lg:text-lg font-semibold text-gray-900">Admin Panel</h1>
             <p className="text-xs text-gray-500">E-commerce</p>
           </div>
         </div>
